@@ -354,25 +354,5 @@ def main():
     sys.stdout.write("\n")
     sys.stdout.flush()
 
-def dump_cats():
-    """
-    Get list of category IDs and names for reference
-    """
-    splitwise = Splitwise()
-    cats = splitwise.get_categories()
-    # Extract ID and Name from the list of dictionaries
-    result = []
-    for item in cats:
-        result.append({'id': item['id'], 'name': item['name']})
-        if 'subcategories' in item:
-            for subcategory in item['subcategories']:
-                result.append({'id': subcategory['id'], 'name': subcategory['name']})
-    file_name = '../test/all_categories_list.csv'
-    with open(file_name, 'w', newline='') as csv_file:
-        fieldnames = ['id', 'name']
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(result)
-
 if __name__ == "__main__":
     main()
